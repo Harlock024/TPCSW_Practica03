@@ -5,6 +5,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author harlock024
@@ -36,9 +37,10 @@ public class DepartamentoGUI extends javax.swing.JInternalFrame {
         btnGuardar = new javax.swing.JButton();
         btnBuscartodos = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
-        txtFindClave = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        btnModificar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
 
         jInternalFrame1.setVisible(true);
 
@@ -109,12 +111,6 @@ public class DepartamentoGUI extends javax.swing.JInternalFrame {
             }
         });
 
-        txtFindClave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFindClaveActionPerformed(evt);
-            }
-        });
-
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -128,6 +124,20 @@ public class DepartamentoGUI extends javax.swing.JInternalFrame {
         ));
         jScrollPane2.setViewportView(jTable1);
 
+        btnModificar.setText("Modiificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
+
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -136,11 +146,7 @@ public class DepartamentoGUI extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(234, 234, 234)
-                                .addComponent(txtFindClave, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(181, 181, 181)
                         .addComponent(btnBuscartodos))
@@ -157,9 +163,13 @@ public class DepartamentoGUI extends javax.swing.JInternalFrame {
                                 .addGap(41, 41, 41)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(57, 57, 57)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnModificar)
+                                    .addComponent(btnEliminar)))
                             .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,22 +177,22 @@ public class DepartamentoGUI extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnModificar))
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnGuardar)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBuscar)
-                    .addComponent(txtFindClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnBuscar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnBuscartodos)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(290, Short.MAX_VALUE))
         );
 
         pack();
@@ -212,7 +222,7 @@ public class DepartamentoGUI extends javax.swing.JInternalFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "error");
             }
-        } 
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnBuscartodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscartodosActionPerformed
@@ -221,11 +231,11 @@ public class DepartamentoGUI extends javax.swing.JInternalFrame {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
         for (Departamento departamento : departamentos) {
-            
+
             String empleadosInfo = departamento.getEmpleados().stream()
                     .map(Empleado::getNombre)
                     .collect(Collectors.joining(", "));
-            
+
             model.addRow(new Object[]{departamento.getClave(), departamento.getNombre(), empleadosInfo});
         }
     }//GEN-LAST:event_btnBuscartodosActionPerformed
@@ -241,15 +251,42 @@ public class DepartamentoGUI extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void txtFindClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFindClaveActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFindClaveActionPerformed
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        DAODepartamento dao = new DAODepartamento();
+        Long clave = Long.valueOf(txtClave.getText());
+        boolean res = dao.delete(clave);
+        if (res) {
+            JOptionPane.showMessageDialog(this, "Departamento eliminado");
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al eliminar el departamento o no encontrado");
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        DAODepartamento dao = new DAODepartamento();
+        Departamento departamento = new Departamento();
+        departamento.setClave(Long.valueOf(txtClave.getText())); // Asegúrate de que el campo de clave esté lleno
+        departamento.setNombre(txtNombre.getText());
+
+        Departamento depaExisted = dao.findById(departamento.getClave());
+        if (depaExisted != null) {
+            var res = dao.update(departamento, departamento.getClave());
+            if (res) {
+                JOptionPane.showMessageDialog(this, "Departamento modificado");
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al modificar el departamento");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Depa no encontrado");
+        }
+    }//GEN-LAST:event_btnModificarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnBuscartodos;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnModificar;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JInternalFrame jInternalFrame2;
     private javax.swing.JLabel jLabel1;
@@ -257,7 +294,6 @@ public class DepartamentoGUI extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtClave;
-    private javax.swing.JTextField txtFindClave;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }

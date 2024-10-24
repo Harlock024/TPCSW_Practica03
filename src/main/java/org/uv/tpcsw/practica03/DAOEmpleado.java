@@ -28,9 +28,9 @@ public class DAOEmpleado implements IDAOGeneral<Empleado, Long> {
         t.commit();
         return true;
     }
+    
     @Override
     public List<Empleado> findAll() {
-
         SessionFactory sf = HibernateUtil.getSessionFactory();
         Session session = sf.getCurrentSession();
         Transaction t = session.beginTransaction();

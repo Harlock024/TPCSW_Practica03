@@ -1,8 +1,10 @@
 package org.uv.tpcsw.practica03;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,16 +30,19 @@ public class Departamento implements Serializable {
     @Column(name = "clave")
     private long clave;
     private String nombre;
+    @OneToMany(mappedBy = "depto", fetch= FetchType.EAGER,cascade = CascadeType.ALL)
+    private Set<Empleado> empleados = new HashSet<>();
    
-    
-    @OneToMany(mappedBy = "depto", fetch= FetchType.LAZY)
-    private Set<Empleado> empleados;
-    
-    
     public void SetEmpleados(Set<Empleado> empleados){
         this.empleados= empleados;
     }
-
+    public Departamento(){}
+    
+    public Departamento(String nombre) {
+        this.nombre = nombre;
+        
+    }
+    
     public Set<Empleado> getEmpleados() {
         return empleados;
   

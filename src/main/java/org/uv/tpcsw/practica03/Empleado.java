@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
@@ -30,9 +31,26 @@ public class Empleado implements Serializable {
     private String direccion;
     @Column
     private String telefono;
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "depto_clave")
     private Departamento depto;
+
+    public Empleado() {
+    }
+
+    public Empleado(long clave, String nombre, String direccion, String telefono, Departamento depto) {
+        this.clave = clave;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.depto = depto;
+    }
+    
+    
+    
+    
+    
+    
 
     public long getClave() {
         return clave;
@@ -40,8 +58,10 @@ public class Empleado implements Serializable {
     
     public void setDepto(Departamento depto){
       this.depto = depto;
+      if (!depto.getEmpleados().contains(this)){
+          depto.getEmpleados().add(this);
+      }
     }
-    
      public Departamento getDepto() {
         return depto;
     }
@@ -74,5 +94,8 @@ public class Empleado implements Serializable {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+    
+    
+    
 
 }

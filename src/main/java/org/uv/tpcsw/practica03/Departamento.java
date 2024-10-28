@@ -30,25 +30,26 @@ public class Departamento implements Serializable {
     @Column(name = "clave")
     private long clave;
     private String nombre;
-    @OneToMany(mappedBy = "depto", fetch= FetchType.EAGER,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "depto", fetch = FetchType.EAGER)
     private Set<Empleado> empleados = new HashSet<>();
-   
-    public void SetEmpleados(Set<Empleado> empleados){
-        this.empleados= empleados;
+
+    public void SetEmpleados(Set<Empleado> empleados) {
+        this.empleados = empleados;
     }
-    public Departamento(){}
-    
+
+    public Departamento() {
+    }
+
     public Departamento(String nombre) {
         this.nombre = nombre;
-        
+
     }
-    
+
     public Set<Empleado> getEmpleados() {
         return empleados;
-  
+
     }
-  
-    
+
     public long getClave() {
         return clave;
     }
@@ -64,4 +65,9 @@ public class Departamento implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+    @Override
+    public String toString(){
+        return nombre;
+    }
+
 }

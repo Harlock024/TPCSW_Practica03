@@ -1,7 +1,6 @@
 package org.uv.tpcsw.practica03;
 
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -17,6 +16,23 @@ public class DepartamentoGUI extends javax.swing.JInternalFrame {
      */
     public DepartamentoGUI() {
         initComponents();
+    }
+
+    public void configurarTabla() {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Clave");
+        model.addColumn("nombre");
+        model.addColumn("Empleados");
+
+        jTable1.setModel(model);
+    }
+
+    public void cargarDatosEnCampos() {
+        int row = jTable1.getSelectedRow();
+        if (row != -1) {
+            txtClave.setText(String.valueOf(jTable1.getValueAt(row, 0)));
+            txtNombre.setText(String.valueOf(jTable1.getValueAt(row, 1)));
+        }
     }
 
     /**
@@ -41,6 +57,7 @@ public class DepartamentoGUI extends javax.swing.JInternalFrame {
         jTable1 = new javax.swing.JTable();
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         jInternalFrame1.setVisible(true);
 
@@ -138,6 +155,13 @@ public class DepartamentoGUI extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton1.setText("Cargar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,31 +169,34 @@ public class DepartamentoGUI extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
+                        .addGap(24, 24, 24)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(181, 181, 181)
-                        .addComponent(btnBuscartodos))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(96, 96, 96)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(117, 117, 117)
-                                .addComponent(btnGuardar))
-                            .addGroup(layout.createSequentialGroup()
+                                .addGap(62, 62, 62)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addGap(41, 41, 41)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(57, 57, 57)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnModificar)
-                                    .addComponent(btnEliminar)))
-                            .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(54, Short.MAX_VALUE))
+                                    .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnGuardar)
+                                        .addGap(16, 16, 16))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(43, 43, 43)
+                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32)
+                                .addComponent(btnBuscartodos)))
+                        .addGap(52, 52, 52)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,14 +211,15 @@ public class DepartamentoGUI extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEliminar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnGuardar)
-                .addGap(18, 18, 18)
-                .addComponent(btnBuscar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBuscar)
+                    .addComponent(btnBuscartodos)
+                    .addComponent(jButton1))
+                .addGap(39, 39, 39)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnBuscartodos)
                 .addContainerGap(290, Short.MAX_VALUE))
         );
 
@@ -226,6 +254,9 @@ public class DepartamentoGUI extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnBuscartodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscartodosActionPerformed
+        actualizartabla();
+    }//GEN-LAST:event_btnBuscartodosActionPerformed
+    private void actualizartabla() {
         DAODepartamento dao = new DAODepartamento();
         List<Departamento> departamentos = dao.findAll();
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -238,16 +269,26 @@ public class DepartamentoGUI extends javax.swing.JInternalFrame {
 
             model.addRow(new Object[]{departamento.getClave(), departamento.getNombre(), empleadosInfo});
         }
-    }//GEN-LAST:event_btnBuscartodosActionPerformed
+
+    }
+
+                                         
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        DAODepartamento dao = new DAODepartamento();
+      DAODepartamento dao = new DAODepartamento();
         Departamento departamento = dao.findById(Long.valueOf(txtClave.getText()));
         if (departamento == null) {
             JOptionPane.showConfirmDialog(this, "departamento no encontrado");
         } else {
-            JOptionPane.showMessageDialog(this, "Empleado  encontrado \n"
-                    + departamento.getClave() + "\n" + departamento.getNombre() + "\n" + departamento.getEmpleados());
+          
+            String infoEmpleados = departamento.getEmpleados().stream()
+                    .map(Empleado::getNombre)
+                    .collect(Collectors.joining(", "));
+          
+           JOptionPane.showMessageDialog(this, "Departamento encontrado \n"
+                + "Clave: " + departamento.getClave() + "\n"
+                + "Nombre: " + departamento.getNombre() + "\n"
+                + "Empleados: " + (infoEmpleados.isEmpty() ? "No hay empleados" : infoEmpleados));
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -260,6 +301,8 @@ public class DepartamentoGUI extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Error al eliminar el departamento o no encontrado");
         }
+        actualizartabla();
+
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
@@ -279,7 +322,13 @@ public class DepartamentoGUI extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Depa no encontrado");
         }
+        actualizartabla();
+
     }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        cargarDatosEnCampos();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
@@ -287,6 +336,7 @@ public class DepartamentoGUI extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnModificar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JInternalFrame jInternalFrame2;
     private javax.swing.JLabel jLabel1;

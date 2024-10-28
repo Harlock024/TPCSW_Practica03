@@ -5,10 +5,6 @@
 package org.uv.tpcsw.practica03;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.persistence.Query;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -28,7 +24,7 @@ public class DAOEmpleado implements IDAOGeneral<Empleado, Long> {
         t.commit();
         return true;
     }
-    
+
     @Override
     public List<Empleado> findAll() {
         SessionFactory sf = HibernateUtil.getSessionFactory();
@@ -60,6 +56,9 @@ public class DAOEmpleado implements IDAOGeneral<Empleado, Long> {
             emp.setNombre(pojo.getNombre());
             emp.setTelefono(pojo.getTelefono());
             emp.setDireccion(pojo.getDireccion());
+            if (pojo.getDepto() != null) {
+                emp.setDepto(pojo.getDepto());
+            }
             t.commit();
             return true;
         }

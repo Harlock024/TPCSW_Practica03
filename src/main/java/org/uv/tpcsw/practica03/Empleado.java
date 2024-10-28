@@ -1,6 +1,7 @@
 package org.uv.tpcsw.practica03;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Entity;
@@ -17,12 +18,12 @@ import javax.persistence.Table;
  * @author harlock024
  */
 @Entity
-@Table(name = "empleado2")
+@Table(name = "empleado")
 public class Empleado implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "empleado2_clave_seq")
-    @SequenceGenerator(name = "empleado2_clave_seq", sequenceName = "empleado2_clave_seq", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "empleado_clave_seq")
+    @SequenceGenerator(name = "empleado_clave_seq", sequenceName = "empleado_clave_seq", initialValue = 1, allocationSize = 1)
     @Column
     private long clave;
     @Column
@@ -45,7 +46,6 @@ public class Empleado implements Serializable {
         this.telefono = telefono;
         this.depto = depto;
     }
-    
     
     
     
